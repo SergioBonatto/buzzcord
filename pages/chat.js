@@ -5,6 +5,35 @@ import appConfig from '../config.json';
 export default function ChatPage() {
     // Sua lógica vai aqui
 
+    const [mensagem, setMensagem] = React.useState('');
+    const [listaDeMensagens, setListaDeMensagens] = React.useState([]);
+     
+    /* Usuário
+
+     - usuário digita no campo textarea;
+     - aperta Enter para enviar;
+     - tem que adicionar o texto na listagem. 
+    */
+
+     /* Dev
+
+     - [X] Campo textarea criado;
+     - [ ] Vamos usar o onChange e o useState (ter if pra caso seja enter pra limpar a variagel);
+     - [ ] Atualizar a lista de mensagens.
+      */
+
+     function handleNovaMensagem(novaMensagem) {
+         const mensagem = {
+             id: MessageList.length + 1,
+             de: 'SergioBonatto',
+             texto: novaMensagem,
+         }
+         setListaDeMensagens([
+            ...listaDeMensagens,
+            mensagem,
+        ])
+        setMensagem('');
+     }
     // ./Sua lógica vai aqui
     return (
         <Box
@@ -38,13 +67,22 @@ export default function ChatPage() {
                         flex: 1,
                         height: '80%',
                         backgroundColor: appConfig.theme.colors.neutrals[600],
-                        flexDirection: 'column-reverse',
+                        flexDirection: 'column',
                         borderRadius: '5px',
                         padding: '16px',
                     }}
                 >
+                    {/* ta mudando o valor? {mensagem} */}
 
-                    {/* <MessageList mensagens={[]} /> */}
+                    <MessageList mensagens={listaDeMensagens} />
+                   {/*  {listaDeMensagens.map((mensagemAtual) => {
+                        return (
+                            <li key={mensagemAtual.id}>
+                                {mensagemAtual.de}: {mensagemAtual.texto}
+                            </li>
+                        )
+
+                    })} */}
 
                     <Box
                         as="form"
@@ -54,6 +92,18 @@ export default function ChatPage() {
                         }}
                     >
                         <TextField
+                            value={mensagem}
+                            onChange={(event) => {
+                                const valor = event.target.value;
+                                setMensagem(valor);
+                            }}
+                            onKeyPress={(event) => {
+                                if(event.key === 'Enter') { 
+                                    event.preventDefault();
+                                   console.log(event);
+                                   handleNovaMensagem(mensagem);
+                                }
+                            }}
                             placeholder="Insira sua mensagem aqui..."
                             type="textarea"
                             styleSheet={{
@@ -67,6 +117,22 @@ export default function ChatPage() {
                                 color: appConfig.theme.colors.neutrals[200],
                             }}
                         />
+                        <Button
+                            type="submit"
+                            onSubmit={(event) => {
+                                event.preventDefault();
+                                handleNovaMensagem(mensagem);
+                            }}
+                            colorVariant="dark"
+                            label='🚀'                            
+                            styleSheet={{                                
+                                marginBottom:'7px',
+                                backgroundColor: appConfig.theme.colors.neutrals[800],
+                                borderRadius:'9%',
+                                width: '60px',
+                                height: '60px',
+                            }}
+                            >🚀</Button>
                     </Box>
                 </Box>
             </Box>
@@ -93,7 +159,7 @@ function Header() {
 }
 
 function MessageList(props) {
-    console.log('MessageList', props);
+    console.log(props.listaDeMensagens);
     return (
         <Box
             tag="ul"
@@ -106,8 +172,9 @@ function MessageList(props) {
                 marginBottom: '16px',
             }}
         >
-
-            <Text
+            {props.mensagens.map((mensagem) => {
+                return (
+                    <Text
                 key={mensagem.id}
                 tag="li"
                 styleSheet={{
@@ -150,6 +217,10 @@ function MessageList(props) {
                 </Box>
                 {mensagem.texto}
             </Text>
+                );
+            })}
+
+            
         </Box>
     )
 }
