@@ -29,8 +29,8 @@ export default function ChatPage() {
              texto: novaMensagem,
          }
          setListaDeMensagens([
+             mensagem,
             ...listaDeMensagens,
-            mensagem,
         ])
         setMensagem('');
      }
@@ -111,7 +111,7 @@ export default function ChatPage() {
                                 border: '0',
                                 resize: 'none',
                                 borderRadius: '5px',
-                                padding: '6px 8px',
+                                padding: '14px 8px',
                                 backgroundColor: appConfig.theme.colors.neutrals[800],
                                 marginRight: '12px',
                                 color: appConfig.theme.colors.neutrals[200],
@@ -170,6 +170,7 @@ function MessageList(props) {
                 flex: 1,
                 color: appConfig.theme.colors.neutrals["000"],
                 marginBottom: '16px',
+                overflow: 'hidden',
             }}
         >
             {props.mensagens.map((mensagem) => {
@@ -193,29 +194,35 @@ function MessageList(props) {
                 >
                     <Image
                         styleSheet={{
-                            width: '20px',
-                            height: '20px',
+                            width: '30px',
+                            height: '30px',
                             borderRadius: '50%',
                             display: 'inline-block',
                             marginRight: '8px',
+                            marginBottom: '-20px'
                         }}
-                        src={`https://github.com/vanessametonini.png`}
+                        src={`https://github.com/SergioBonatto.png`}
                     />
-                    <Text tag="strong">
+                    <Text 
+                        tag="strong"
+                        styleSheet={{
+                            marginLeft: '42px',
+                        }}>
                         {mensagem.de}
                     </Text>
                     <Text
                         styleSheet={{
                             fontSize: '10px',
-                            marginLeft: '8px',
+                            marginLeft: '198px',
                             color: appConfig.theme.colors.neutrals[300],
+                            marginTop: '-13px'
                         }}
                         tag="span"
                     >
                         {(new Date().toLocaleDateString())}
                     </Text>
                 </Box>
-                {mensagem.texto}
+                     {mensagem.texto}
             </Text>
                 );
             })}
