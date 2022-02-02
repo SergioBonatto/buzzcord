@@ -236,10 +236,12 @@ function MessageList(props) {
                     display: "inline-block",
                     marginRight: "8px",
                     marginBottom: "-25px",
+                    transition: '1s',
                     hover: {
-                      width:'50px',
-                      height:'50px',
-                      borderRadius:'12%'
+                      width:'40px',
+                      height:'40px',
+                      borderRadius:'50%',
+                      marginBottom:'-30px'
                     }
                     }}
                     src={`https://github.com/${mensagem.de}.png`}
@@ -247,7 +249,7 @@ function MessageList(props) {
                 <Text
                     tag="strong"
                     styleSheet={{
-                      marginLeft:'42px'
+                      marginLeft:'42px',                    
                     }}
                 >
                     {mensagem.de}
@@ -255,7 +257,7 @@ function MessageList(props) {
                 <Text
                     styleSheet={{
                     fontSize: "10px",
-                    marginLeft: "84px",
+                    marginLeft: "104px",
                     color: appConfig.theme.colors.neutrals[300],
                     //marginTop: "-13px",
                     }}
