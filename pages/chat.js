@@ -2,6 +2,8 @@ import { Box, Text, TextField, Image, Button } from "@skynexui/components";
 import React from "react";
 import appConfig from "../config.json";
 import { createClient } from "@supabase/supabase-js";
+import { useRouter} from 'next/router';
+import { ButtonSendSticker } from '../src/components/ButtonSendSticker';
 
 const SUPABASE_ANON_KEY =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MzMzMzEwMSwiZXhwIjoxOTU4OTA5MTAxfQ.2weBL3PPoaJKi9241qeBwiGiuXidWq-rmiHEFxQ9uwk";
@@ -10,6 +12,9 @@ const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 export default function ChatPage() {
   // Sua lógica vai aqui
+
+  const roteamento = useRouter();
+  const usuarioLogado = roteamento.query.username; 
 
   const [mensagem, setMensagem] = React.useState("");
   const [listaDeMensagens, setListaDeMensagens] = React.useState([]);
@@ -44,7 +49,7 @@ export default function ChatPage() {
   function handleNovaMensagem(novaMensagem) {
     const mensagem = {
       //id: MessageList.length + 1,
-      de: "SergioBonatto",
+      de: usuarioLogado,
       texto: novaMensagem,
     };
 
@@ -149,7 +154,8 @@ export default function ChatPage() {
                 color: appConfig.theme.colors.neutrals[200],
               }}
             />
-            <Button
+            <ButtonSendSticker/>
+            {/* <Button
               type="submit"
               //onSubmit={(handleNovaMensagem(mensagem))}
               colorVariant="dark"
@@ -163,7 +169,7 @@ export default function ChatPage() {
               }}
             >
               🚀
-            </Button>
+            </Button> */}
           </Box>
         </Box>
       </Box>
@@ -217,7 +223,7 @@ function MessageList(props) {
                 styleSheet={{
                 borderRadius: "5px",
                 padding: '6px',
-                marginBottom: '12px',
+                marginBottom: '16px',
                 hover: {
                     backgroundColor: appConfig.theme.colors.neutrals[700],
                 },

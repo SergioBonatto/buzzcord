@@ -78,7 +78,7 @@ export default function PaginaInicial() {
               //console.log('alguém submeteu o form')
               infosDoEvento.preventDefault()
               //window.location.href = '/chat'
-              roteamento.push('/chat');
+              roteamento.push(`/chat?username=${username}`);
             }}
             styleSheet={{
               display: "flex",
