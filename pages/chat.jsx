@@ -107,6 +107,7 @@ export default function ChatPage() {
             flexDirection: "column",
             borderRadius: "5px",
             padding: "16px",
+            wordBreak: 'break-word',
           }}
         >
           {/* ta mudando o valor? {mensagem} */}
@@ -207,7 +208,8 @@ function MessageList(props) {
     <Box
       tag="ul"
       styleSheet={{
-        //overflow: "scroll",
+        overflow: "scroll",
+        overflowX: 'hidden',
         display: "flex",
         flexDirection: "column-reverse",
         flex: 1,
@@ -279,3 +281,6 @@ function MessageList(props) {
     </Box>
   );
 }
+
+
+//url(https://img.elo7.com.br/product/main/1F5C183/adesivo-nuvem-do-toy-story-adesivo-nuven-toy-story.jpg)`
